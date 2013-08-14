@@ -1,0 +1,15 @@
+{
+    "name": "ecspat-cg-logger",
+    "version": "0.1.0",
+    "author": "Max Schaefer <schaefer@ntu.edu.sg>",
+    "description": "Dynamic analysis for logging call graphs and property reads",
+    "dependencies" : {
+		"escodegen": "*",
+    	"esprima": "*"
+    },
+    "repository": {
+    	"type" : "git",
+  		"url" : "https://github.com/ecspat/cg-logger.git"
+    },
+    "license": "Eclipse"
+}

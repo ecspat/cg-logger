@@ -5,7 +5,11 @@
     "description": "Dynamic analysis for logging call graphs and property reads",
     "dependencies" : {
 		"escodegen": "*",
-    	"esprima": "*"
+    	"esprima": "*",
+    	"estraverse": "*",
+    	"nodeunit": "*",
+    	"temp": "*",
+    	"zombie": "*"
     },
     "repository": {
     	"type" : "git",

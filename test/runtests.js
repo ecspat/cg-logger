@@ -34,6 +34,10 @@ function runtest(test, input_file, expected_output_file) {
 		} else {
 			var actual_output = browser.window.__dump_call_graph().trim();
 			var expected_output = fs.readFileSync(expected_output_file, 'utf-8').trim();
+			// uncomment the following lines to get more readable diagnostics
+			/*if(actual_output != expected_output) {
+				console.log("actual:\n" + actual_output);
+			}*/
 			test.equal(actual_output, expected_output);
 		}
 		test.done();

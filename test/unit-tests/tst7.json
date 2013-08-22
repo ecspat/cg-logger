@@ -1,1 +1,11 @@
-{}
+{
+    "tst7.js@1:8-62": [
+        "Array_prototype_map"
+    ],
+    "tst7.js@1:8-111": [
+        "Array_prototype_filter"
+    ],
+    "tst7.js@6:113-127": [
+        "console_log"
+    ]
+}

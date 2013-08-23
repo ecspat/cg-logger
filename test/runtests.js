@@ -44,10 +44,11 @@ function runtest(test, input_file, expected_output_file) {
 	});
 }
 
-var DIR = __dirname + "/unit-tests";
+var cg_tests = {};
+var DIR = __dirname + "/cg-tests";
 fs.readdirSync(DIR).forEach(function(file) {
 	if (/\.js$/.test(file)) {
-		exports[file] = function(test) {
+		exports["cg-tests/" + file] = cg_tests[file] = function(test) {
 			runtest(test, DIR + '/' + file, DIR + '/' + file + "on");
 		};
 	}
@@ -55,5 +56,5 @@ fs.readdirSync(DIR).forEach(function(file) {
 
 var reporter = require('nodeunit').reporters['default'];
 reporter.run({
-	"unit tests": module.exports
+	"cg tests": cg_tests
 });

@@ -1,0 +1,11 @@
+{
+    "tst3.js@2:53-65": [
+        "constructor",
+        "hasOwnProperty",
+        "isPrototypeOf",
+        "propertyIsEnumerable",
+        "toLocaleString",
+        "toString",
+        "valueOf"
+    ]
+}

@@ -71,7 +71,7 @@ fs.readdirSync(PROP_TESTS_DIR).forEach(function(file) {
 if(process.argv.length > 2) {
 	var fixture = {};
 	for(var i=2,n=process.argv.length;i<n;++i) {
-		var tmp = process.argv[2].split("/"),
+		var tmp = process.argv[i].split("/"),
 			suite = tmp[tmp.length-2],
 			test = tmp[tmp.length-1];
 		fixture[suite] = fixture[suite] || {};

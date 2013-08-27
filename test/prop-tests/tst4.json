@@ -1,0 +1,14 @@
+{
+    "tst4.js@1:0-12": [
+        "constructor",
+        "hasOwnProperty",
+        "isPrototypeOf",
+        "propertyIsEnumerable",
+        "toExponential",
+        "toFixed",
+        "toLocaleString",
+        "toPrecision",
+        "toString",
+        "valueOf"
+    ]
+}

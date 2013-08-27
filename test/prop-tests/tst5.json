@@ -1,0 +1,31 @@
+{
+    "tst5.js@2:30-34": [
+        "concat",
+        "constructor",
+        "every",
+        "filter",
+        "forEach",
+        "hasOwnProperty",
+        "indexOf",
+        "isPrototypeOf",
+        "join",
+        "lastIndexOf",
+        "length",
+        "map",
+        "pop",
+        "propertyIsEnumerable",
+        "push",
+        "reduce",
+        "reduceRight",
+        "reverse",
+        "shift",
+        "slice",
+        "some",
+        "sort",
+        "splice",
+        "toLocaleString",
+        "toString",
+        "unshift",
+        "valueOf"
+    ]
+}

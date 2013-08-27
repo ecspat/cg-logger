@@ -9,13 +9,14 @@
  *     Max Schaefer - initial API and implementation
  *******************************************************************************/
 
-/*global require exports module __dirname*/
+/*global require exports module __dirname process*/
 
 var fs = require('fs'),
     temp = require('temp'),
-    Browser = require('zombie');
+    Browser = require('zombie'),
+    reporter = require('nodeunit').reporters['default'];
     
-function runtest(test, input_file, expected_output_file) {
+function runtest(test, input_file, expected_output_file, get_actual_output) {
 	var htmlTmp = temp.openSync({ suffix: '.html' }),
 	    jsTmp = temp.openSync({ suffix: '.js' });
 			    
@@ -32,7 +33,7 @@ function runtest(test, input_file, expected_output_file) {
 		if(browser.errors && browser.errors.length) {
 			test.fail(browser.errors.join('\n'));
 		} else {
-			var actual_output = browser.window.__dump_call_graph().trim();
+			var actual_output = get_actual_output(browser.window).trim();
 			var expected_output = fs.readFileSync(expected_output_file, 'utf-8').trim();
 			// uncomment the following lines to get more readable diagnostics
 			if(actual_output != expected_output) {
@@ -44,16 +45,39 @@ function runtest(test, input_file, expected_output_file) {
 	});
 }
 
-var DIR = __dirname + "/unit-tests";
-fs.readdirSync(DIR).forEach(function(file) {
+exports["cg-tests"] = {};
+var CG_TESTS_DIR = __dirname + "/cg-tests";
+fs.readdirSync(CG_TESTS_DIR).forEach(function(file) {
 	if (/\.js$/.test(file)) {
-		exports[file] = function(test) {
-			runtest(test, DIR + '/' + file, DIR + '/' + file + "on");
+		exports["cg-tests"][file] = function(test) {
+			runtest(test, CG_TESTS_DIR + '/' + file, CG_TESTS_DIR + '/' + file + "on",
+				    function(window) { return window.__dump_call_graph(); });
 		};
 	}
 });
 
-var reporter = require('nodeunit').reporters['default'];
-reporter.run({
-	"unit tests": module.exports
+exports["prop-tests"] = {};
+var PROP_TESTS_DIR = __dirname + "/prop-tests";
+fs.readdirSync(PROP_TESTS_DIR).forEach(function(file) {
+	if (/\.js$/.test(file)) {
+		exports["prop-tests"][file] = function(test) {
+			runtest(test, PROP_TESTS_DIR + '/' + file, PROP_TESTS_DIR + '/' + file + "on",
+					function(window) { return window.__dump_props(); });
+		};
+	}
 });
+
+/* If any arguments are passed, interpret them as names of tests to run. Otherwise, run all tests. */
+if(process.argv.length > 2) {
+	var fixture = {};
+	for(var i=2,n=process.argv.length;i<n;++i) {
+		var tmp = process.argv[i].split("/"),
+			suite = tmp[tmp.length-2],
+			test = tmp[tmp.length-1];
+		fixture[suite] = fixture[suite] || {};
+		fixture[suite][test] = exports[suite][test];
+	}
+	reporter.run(fixture);
+} else {
+	reporter.run(exports);
+}

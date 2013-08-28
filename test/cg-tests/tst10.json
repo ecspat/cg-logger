@@ -1,0 +1,11 @@
+{
+    "tst10.js@5:56-63": [
+        "tst10.js@1:0-45"
+    ],
+    "tst10.js@7:70-94": [
+        "Object_prototype_hasOwnProperty"
+    ],
+    "tst10.js@8:97-116": [
+        "console_log"
+    ]
+}
